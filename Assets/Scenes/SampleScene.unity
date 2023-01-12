@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
+  moveSpeed: 5
   _playerRb: {fileID: 0}
 --- !u!4 &766930237 stripped
 Transform:
