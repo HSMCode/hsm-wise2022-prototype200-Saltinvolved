@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3646271737952227552}
   - component: {fileID: 3823716262862562259}
   - component: {fileID: 3823716262862562258}
+  - component: {fileID: 7670055139028388672}
   m_Layer: 0
   m_Name: Astroboi
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 4166384355536538202}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.9999999, y: 0, z: -1.4999999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.0932, y: 3.0932, z: 3.0932}
   m_Children:
   - {fileID: 3407732639780749690}
   - {fileID: 8647394124964250783}
@@ -120,7 +121,7 @@ Transform:
   - {fileID: 5707292592023185113}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.968, y: 132.559, z: 16.076}
 --- !u!54 &3823716262862562259
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,7 +152,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   moveSpeed: 5
-  _playerRb: {fileID: 0}
+  _playerRb: {fileID: 3823716262862562259}
+--- !u!136 &7670055139028388672
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166384355536538202}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &6879812185086657444
 GameObject:
   m_ObjectHideFlags: 0
