@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7963909766343654463}
   - component: {fileID: 5287660222586652917}
   - component: {fileID: 2678869371934745327}
+  - component: {fileID: 6328715494801699581}
   m_Layer: 0
   m_Name: sandwich
   m_TagString: Untagged
@@ -99,6 +100,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AstroBoi: {fileID: 0}
+--- !u!65 &6328715494801699581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5936156098436409632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35090038, y: 0.15982419, z: 0.35215756}
+  m_Center: {x: 0, y: 0.079912096, z: 0}
 --- !u!1 &6623453569210465533
 GameObject:
   m_ObjectHideFlags: 0
