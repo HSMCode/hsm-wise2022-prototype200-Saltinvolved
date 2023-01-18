@@ -5573,6 +5573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hangar_largeA
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f99bda26e2881b84eb717fcc054d718b, type: 3}
+      propertyPath: m_TagString
+      value: Food
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99bda26e2881b84eb717fcc054d718b, type: 3}
 --- !u!1 &963194225
@@ -5939,7 +5943,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -6378,15 +6382,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36781916, g: 0.090067655, b: 0.8301887, a: 0.392}
+  m_Color: {r: 0.91764706, g: 0.02352941, b: 0.68267363, a: 0.9490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7af1b1fb4dee8d740b7c9406d0ef8b95, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6920,14 +6924,14 @@ RectTransform:
   m_GameObject: {fileID: 2020194314}
   m_LocalRotation: {x: -0, y: -0, z: -0.9999943, w: 0.0033855496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.220607, y: 5.4273086, z: 6.148289}
+  m_LocalScale: {x: 2.9034576, y: 1.6558975, z: 6.148289}
   m_Children: []
   m_Father: {fileID: 1431907993}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.612}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3, y: -2}
+  m_AnchoredPosition: {x: 4, y: -14}
   m_SizeDelta: {x: -812, y: -236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2020194316
@@ -7084,6 +7088,10 @@ PrefabInstance:
     - target: {fileID: 578887603045153888, guid: 06b655028fcf8dc48914878788e065d1, type: 3}
       propertyPath: m_Name
       value: donutSprinkles
+      objectReference: {fileID: 0}
+    - target: {fileID: 578887603045153888, guid: 06b655028fcf8dc48914878788e065d1, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     - target: {fileID: 1313766547898902453, guid: 06b655028fcf8dc48914878788e065d1, type: 3}
       propertyPath: AstroBoi
@@ -7350,6 +7358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: banana
       objectReference: {fileID: 0}
+    - target: {fileID: 4071494750088137774, guid: 239476ff51ac624488b1950f74de7683, type: 3}
+      propertyPath: m_TagString
+      value: Food
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 239476ff51ac624488b1950f74de7683, type: 3}
 --- !u!1001 &3823716263124303245
@@ -7391,6 +7403,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.085999794
       objectReference: {fileID: 0}
+    - target: {fileID: 3823716262862562258, guid: 0af03922168a8e5499221d2490b295eb, type: 3}
+      propertyPath: time
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823716262862562258, guid: 0af03922168a8e5499221d2490b295eb, type: 3}
+      propertyPath: Farts
+      value: 
+      objectReference: {fileID: 352767331}
+    - target: {fileID: 3823716262862562258, guid: 0af03922168a8e5499221d2490b295eb, type: 3}
+      propertyPath: astroBoi
+      value: 
+      objectReference: {fileID: 919132147559200727}
+    - target: {fileID: 3823716262862562258, guid: 0af03922168a8e5499221d2490b295eb, type: 3}
+      propertyPath: fartSound
+      value: 
+      objectReference: {fileID: 1771189466}
     - target: {fileID: 4166384355536538202, guid: 0af03922168a8e5499221d2490b295eb, type: 3}
       propertyPath: m_Name
       value: AstroBoi
@@ -7639,11 +7667,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: pizza
       objectReference: {fileID: 0}
+    - target: {fileID: 2069006377157426327, guid: 8231a1035934b424986dc67075aef15b, type: 3}
+      propertyPath: m_TagString
+      value: Food
+      objectReference: {fileID: 0}
     - target: {fileID: 6001817576793887320, guid: 8231a1035934b424986dc67075aef15b, type: 3}
       propertyPath: AstroBoi
       value: 
       objectReference: {fileID: 919132147559200727}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6001817576793887320, guid: 8231a1035934b424986dc67075aef15b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8231a1035934b424986dc67075aef15b, type: 3}
 --- !u!1001 &9170165552390142295
 PrefabInstance:
@@ -7655,6 +7688,10 @@ PrefabInstance:
     - target: {fileID: 8323656146317333222, guid: 2972aef208f5b5542a241540d2c2d4aa, type: 3}
       propertyPath: m_Name
       value: apple
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323656146317333222, guid: 2972aef208f5b5542a241540d2c2d4aa, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     - target: {fileID: 8703278325873608796, guid: 2972aef208f5b5542a241540d2c2d4aa, type: 3}
       propertyPath: m_RootOrder
