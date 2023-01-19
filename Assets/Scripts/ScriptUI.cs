@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class ScriptUI : MonoBehaviour
 {
     private GameObject _gameUI;
     private GameObject _gameOverUI;
@@ -11,7 +11,7 @@ public class UI : MonoBehaviour
     public float timeRemaining = 20;
     public Text oxygenText;
     public AudioSource lowSound;
-    private bool countingDown = true;
+    public bool _countingDown = true;
 
      //Variables for result UI
     private Text _resultUI;
@@ -19,9 +19,9 @@ public class UI : MonoBehaviour
     public string resultWin = "You won!";
 
     // variables for Game Over
-    private bool gameWon;
+    public bool _gameWon;
     private bool gameLost;
-    private bool gameOver = false;
+    public bool _gameOver = false;
 
     // Variables for Win
     private GameObject _astroBoi;
@@ -47,8 +47,10 @@ public class UI : MonoBehaviour
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false);        
         // Play Low oxygen Audio at 14 sek
+        //LowPlay();
+         Invoke("LowPlay",14f);
        
-        
+       
         
     
        
@@ -65,7 +67,7 @@ public class UI : MonoBehaviour
 
     private void OxygenTimer()
     {
-        if(countingDown)
+        if(_countingDown)
         {
             if (timeRemaining > 0)
             {
@@ -73,56 +75,58 @@ public class UI : MonoBehaviour
             oxygenText.text= "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
 
                 
+                
+            
                 if (timeRemaining < 6)
                 {
                     oxygenText.color= Color.red;
                     
                 }
-            }
+            
              if (timeRemaining < 0)
             {
                 
                 oxygenText.text = "Oxygen Empty";
                 oxygenText.color= Color.red;
-                countingDown = false; 
-                lowSound.Stop();
+                _countingDown = false; 
+                //lowSound.Stop();
                 CheckGameOver();
             }
 
         }
     }
         
-    private void CheckGameOver()
+    void CheckGameOver()
     {
-        //  void OnTriggerEnter(Collider other)
-        // {
-        //     // When player collides with goal 
-        //     if(_astroBoi.name == _spaceShip.name)
-        //     {
-        //         gameWon = true;
-        //         gameOver = true;
-
-        //         _resultUI.text = resultWin;
-        //         _resultUI.color = Color.green;
-
-        //     }
-            
+        if (_gameWon)
+        {
+            _resultUI.text = resultWin;
+            _resultUI.color = Color.green;
+        }
             
             if (timeRemaining < 0)
             {
                 gameLost = true;
-                gameOver = true;
+                _gameOver = true;
                 _resultUI.text = resultLost;
                 _resultUI.color = Color.red;
 
             }
-             if (gameOver)
+             if (_gameOver)
         {
              _gameUI.SetActive(false);
             _gameOverUI.SetActive(true);
+            Destroy(lowSound);
         }
     }
+
+    // void LowPlay()
+    // {
+    //     lowSound.Play();
+    // }
 }
+}
+
     
 
     

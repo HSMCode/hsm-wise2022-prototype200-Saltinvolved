@@ -112,7 +112,7 @@ private void OnTriggerEnter(Collider other)
     {
         EmitParticles(); 
         fartSound.Play();
-        //Destroy (other.CompareTag("Food"),0);
+        //Destroy(other.GameObject);
         ActivateSpeedBoost();
     }
  }

@@ -9,7 +9,8 @@ public class SpaceshipGoal : MonoBehaviour
     //public AudioSource audioSource;
     public ParticleSystem playParticleSystem;
     public ParticleSystem emitParticleSystem;
-    
+    //Get Game Over Bools 
+    public ScriptUI script;
     
  
     
@@ -43,13 +44,21 @@ public class SpaceshipGoal : MonoBehaviour
             Debug.Log("Exit");
             //using a ParticleSystem with Play and Stop - play false 
             PlayParticles(false); 
+            EmitParticles();
+            
+            script._countingDown = false;
+            script._gameWon = true;
+            script._gameOver=true;
+            
+
+            
         }
     }
 
     //custom method to execute emitting of partiles 
-    void EmitParticles()
-    {
-        emitParticleSystem.Emit(50);
+     void EmitParticles()
+     {
+         emitParticleSystem.Emit(50);
     }
     void PlayParticles(bool on)
     {
