@@ -8,7 +8,7 @@ public class ScriptUI : MonoBehaviour
     private GameObject _gameUI;
     private GameObject _gameOverUI;
     //Variables for Timer 
-    public float timeRemaining = 20f;
+    public float timeRemaining;
     public Text oxygenText;
     public AudioSource lowSound;
     public bool _countingDown = true;
@@ -49,10 +49,8 @@ public class ScriptUI : MonoBehaviour
       
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false);        
-        // Play Low oxygen Audio at 14 sek
-        //LowPlay();
-         //Invoke("LowPlay",14f);
-       
+        Invoke("PlaySound",13.0f);
+    } 
        
     void Update()
     {
@@ -60,17 +58,17 @@ public class ScriptUI : MonoBehaviour
 
         //SCORE?
     }
-}
+
 
     private void OxygenTimer()
     {
-        if (_countingDown)
-        {
+        //if (_countingDown)
+        //{
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
                 oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
-
+                Debug.Log(timeRemaining);
 
 
 
@@ -85,13 +83,13 @@ public class ScriptUI : MonoBehaviour
 
                     oxygenText.text = "Oxygen Empty";
                     oxygenText.color = Color.red;
-                    _countingDown = false;
+                    //_countingDown = false;
                     //lowSound.Stop();
                     CheckGameOver();
                 }
 
             }
-        }
+        //}
 
         // void LowPlay()
         // {
@@ -101,7 +99,7 @@ public class ScriptUI : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (script._landed)
+        if (script._landed = true)
         {
             _gameWon = true;
             _gameOver = true;
