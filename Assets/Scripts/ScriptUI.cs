@@ -8,7 +8,7 @@ public class ScriptUI : MonoBehaviour
     private GameObject _gameUI;
     private GameObject _gameOverUI;
     //Variables for Timer 
-    public float timeRemaining = 20;
+    public float timeRemaining = 20f;
     public Text oxygenText;
     public AudioSource lowSound;
     public bool _countingDown = true;
@@ -26,6 +26,9 @@ public class ScriptUI : MonoBehaviour
     // Variables for Win
     private GameObject _astroBoi;
     private GameObject _spaceShip;
+
+    //getting script for Win
+    public SpaceshipGoal script;
     
     
 
@@ -48,90 +51,107 @@ public class ScriptUI : MonoBehaviour
         _gameOverUI.SetActive(false);        
         // Play Low oxygen Audio at 14 sek
         //LowPlay();
-         Invoke("LowPlay",14f);
+         //Invoke("LowPlay",14f);
        
-       
-        
-    
-       
-
-
-    }
-
-    
        
     void Update()
     {
         OxygenTimer();
+
+        //SCORE?
     }
+}
 
     private void OxygenTimer()
     {
-        if(_countingDown)
+        if (_countingDown)
         {
             if (timeRemaining > 0)
             {
-            timeRemaining -= Time.deltaTime;
-            oxygenText.text= "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
+                timeRemaining -= Time.deltaTime;
+                oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
 
-                
-                
-            
+
+
+
                 if (timeRemaining < 6)
                 {
-                    oxygenText.color= Color.red;
-                    
+                    oxygenText.color = Color.red;
+
                 }
-            
-             if (timeRemaining < 0)
-            {
-                
-                oxygenText.text = "Oxygen Empty";
-                oxygenText.color= Color.red;
-                _countingDown = false; 
-                //lowSound.Stop();
-                CheckGameOver();
+
+                if (timeRemaining < 0)
+                {
+
+                    oxygenText.text = "Oxygen Empty";
+                    oxygenText.color = Color.red;
+                    _countingDown = false;
+                    //lowSound.Stop();
+                    CheckGameOver();
+                }
+
             }
+        }
+
+        // void LowPlay()
+        // {
+        //     lowSound.Play();
+        // }
+    }
+
+    private void CheckGameOver()
+    {
+        if (script._landed)
+        {
+            _gameWon = true;
+            _gameOver = true;
+
+           StartCoroutine(GameOver());
+        }
+
+        if (timeRemaining < 0)
+        {
+            gameLost = true;
+            _gameOver = true;
+            _resultUI.text = resultLost;
+            _resultUI.color = Color.red;
 
         }
+        if (_gameOver)
+        {
+            _gameUI.SetActive(false);
+            _gameOverUI.SetActive(true);
+            //Destroy(lowSound);
+        }
+    
     }
-        
-    void CheckGameOver()
+
+    private IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(2f);
+
         if (_gameWon)
         {
             _resultUI.text = resultWin;
             _resultUI.color = Color.green;
+            Debug.Log("game Won");
         }
-            
-            if (timeRemaining < 0)
-            {
-                gameLost = true;
-                _gameOver = true;
-                _resultUI.text = resultLost;
-                _resultUI.color = Color.red;
-
-            }
-             if (_gameOver)
+        else if (gameLost)
         {
-             _gameUI.SetActive(false);
-            _gameOverUI.SetActive(true);
-            Destroy(lowSound);
+            _resultUI.text = resultLost;
+            _resultUI.color = Color.red;
         }
+
+        _gameUI.SetActive(false);
+        _gameOverUI.SetActive(true);
+
     }
-
-    // void LowPlay()
-    // {
-    //     lowSound.Play();
-    // }
-}
 }
 
-    
-
-    
 
 
-        
+
+
+
 
 

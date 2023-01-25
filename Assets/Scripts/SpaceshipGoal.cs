@@ -10,11 +10,12 @@ public class SpaceshipGoal : MonoBehaviour
     public ParticleSystem playParticleSystem;
     public ParticleSystem emitParticleSystem;
     //Get Game Over Bools 
-    public ScriptUI script;
+   // public ScriptUI script;
+    public bool _landed= false;
     
  
     
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         Debug.Log(gameObject.name + "triggerd into" + gameObject.name);
 
@@ -22,7 +23,7 @@ public class SpaceshipGoal : MonoBehaviour
         if(other.name == AstroBoi.name)
         { 
             //audioSource.Play();
-            //Debug.Log("Victory");
+            
 
             //Using a ParticleSystem for emission 
             EmitParticles();
@@ -30,6 +31,7 @@ public class SpaceshipGoal : MonoBehaviour
            // Using a ParticleSystem with play and Stop - play true
         
             PlayParticles(true);
+            _landed = true;
         }
     }
     
@@ -45,10 +47,9 @@ public class SpaceshipGoal : MonoBehaviour
             //using a ParticleSystem with Play and Stop - play false 
             PlayParticles(false); 
             EmitParticles();
+             
             
-            script._countingDown = false;
-            script._gameWon = true;
-            script._gameOver=true;
+            
             
 
             

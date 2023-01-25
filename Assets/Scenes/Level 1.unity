@@ -10680,8 +10680,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 89, y: -22}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 286, y: -87}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015678057
 MonoBehaviour:
@@ -10705,11 +10705,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -10745,6 +10745,7 @@ MonoBehaviour:
   resultWin: You won!
   _gameWon: 0
   _gameOver: 0
+  script: {fileID: 0}
 --- !u!82 &1015678060
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12192,7 +12193,7 @@ MonoBehaviour:
   AstroBoi: {fileID: 919132147559200727}
   playParticleSystem: {fileID: 699055414}
   emitParticleSystem: {fileID: 699055414}
-  script: {fileID: 1015678059}
+  _landed: 0
 --- !u!1 &2020194314
 GameObject:
   m_ObjectHideFlags: 0
@@ -12220,14 +12221,14 @@ RectTransform:
   m_GameObject: {fileID: 2020194314}
   m_LocalRotation: {x: -0, y: -0, z: -0.9999943, w: 0.0033855496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 14.940784, y: 1.994243, z: 6.0536423}
+  m_LocalScale: {x: 2.09019, y: 1.4254321, z: 5.7766275}
   m_Children: []
   m_Father: {fileID: 1431907993}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.612}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: -14}
+  m_AnchoredPosition: {x: -150.99994, y: -14}
   m_SizeDelta: {x: -812, y: -236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2020194316
