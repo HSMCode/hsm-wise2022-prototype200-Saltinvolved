@@ -99,7 +99,7 @@ public class ScriptUI : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (script._landed = true)
+        if (script._landed == true)
         {
             _gameWon = true;
             _gameOver = true;

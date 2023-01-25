@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
     public float normalSpeed = 5f;
     public Rigidbody _playerRb;
     private bool isMoving = false;
-    private bool IsJumpPressed = false;
+    //private bool IsJumpPressed = false;
     private Vector3 moveDirection;
 
     // Variables for Item Collect
@@ -45,21 +45,21 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         //IsJumpPressed = Input.GetButtonDown(KeyCode.Space);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            IsJumpPressed = true;
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     IsJumpPressed = true;
+        // }
         ProcessInputs();
     }
 
     void FixedUpdate()
     {
-        if (IsJumpPressed)
-        {
-            _playerRb.velocity = new Vector3(0, 10, 0);
-            isMoving = true;
-            Debug.Log("jump");
-        }
+        // if (IsJumpPressed)
+        // {
+        //     _playerRb.velocity = new Vector3(0, 10, 0);
+        //     isMoving = true;
+        //     Debug.Log("jump");
+        // }
 
         if (isMoving)
         {
@@ -112,7 +112,7 @@ private void OnTriggerEnter(Collider other)
     {
         EmitParticles(); 
         fartSound.Play();
-        //Destroy(other.GameObject);
+        Destroy(other.gameObject);
         ActivateSpeedBoost();
     }
  }
