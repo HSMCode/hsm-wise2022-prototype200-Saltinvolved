@@ -17,25 +17,27 @@ public class ScriptUI : MonoBehaviour
     // Low Oxygen Effects
      public AudioSource lowSound;
      public Image danger;
-     public bool isDangerOn;
+    
 
 
      //Variables for result UI
     private Text _resultUI;
      public string resultLost = "You lost!";
-    public string resultWin = "You won!";
+    public string resultWon = "You won!";
 
     // variables for Game Over
     public bool _gameWon;
-    private bool gameLost;
+    public bool gameLost;
     public bool _gameOver = false;
 
     // Variables for Win
-    private GameObject _astroBoi;
-    private GameObject _spaceShip;
+    //private GameObject _astroBoi;
+    //private GameObject _spaceShip;
 
     //getting script for Win
     public SpaceshipGoal script;
+    public GameObject SpaceShip;
+     
     
     
 
@@ -50,15 +52,19 @@ public class ScriptUI : MonoBehaviour
         // get components for Oxygen low 
         oxygenText = GetComponent<Text>() as Text;
         //lowSound  = GetComponent<AudioSource> () as AudioSource;
-        //danger = GetComponent <danger>() as Image;
+        
         //get components for Winbedingungen 
-        _astroBoi = GameObject.Find("AstroBoi");
-        _spaceShip = GameObject.Find("SpaceShip");
+        //_astroBoi = GameObject.Find("AstroBoi");
+        //_spaceShip = GameObject.Find("SpaceShip");
+        script = SpaceShip.GetComponent<SpaceshipGoal>();
+
+
+
       
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false); 
-        lowSound.PlayDelayed(5f);       
-        //Invoke("LowSound",10f-5f);
+        lowSound.PlayDelayed(25f);       
+        
           
          danger.enabled = false;
          
@@ -69,120 +75,117 @@ public class ScriptUI : MonoBehaviour
     void Update()
     {
         OxygenTimer();
+        CheckGameOver();
     }
 
 
-    private IEnumerator GameOver()
-    {
-        yield return new WaitForSeconds(2f);
-
-        if (_gameWon)
-        {
-            _resultUI.text = resultWin;
-            _resultUI.color = Color.green;
-            //Debug.Log("game Won");
-        }
-        else if (gameLost)
-        {
-            _resultUI.text = resultLost;
-            _resultUI.color = Color.red;
-        }
-
-        _gameUI.SetActive(false);
-        _gameOverUI.SetActive(true);
-
-    }
+    
 
     private void CheckGameOver()
     {
+
+        
         if (script._landed == true)
         {
             _gameWon = true;
             _gameOver = true;
-
-            StartCoroutine(GameOver());
+            _countingDown = false;
+             _resultUI.text = resultWon;
+            _resultUI.color = Color.green;
         }
 
-        if (timeRemaining < 0)
+
+            
+
+        
+    
+
+        else if (timeRemaining < 0)
         {
             gameLost = true;
             _gameOver = true;
+            _countingDown = false;
             _resultUI.text = resultLost;
             _resultUI.color = Color.red;
+            
 
         }
         if (_gameOver)
         {
             _gameUI.SetActive(false);
             _gameOverUI.SetActive(true);
-            //Destroy(lowSound);
+            Destroy(lowSound);
         }
 
     }
+
 
     private void OxygenTimer()
     {
         if (_countingDown)
         {
-        if (timeRemaining > 0)
-        {
-            timeRemaining -= Time.deltaTime;
-            oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
-            //Debug.Log(timeRemaining);
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
+                //Debug.Log(timeRemaining);
 
 
 
-            if (timeRemaining < 6)
-            {
-                oxygenText.color = Color.red;
-                danger.enabled = true;
-                
+                if (timeRemaining < 6)
+                {
+                    oxygenText.color = Color.red;
+                    danger.enabled = true;
+
+
+                }
+                if (timeRemaining < 5)
+                {
+
+                    danger.enabled = false;
+                }
+                if (timeRemaining < 4)
+                {
+
+                    danger.enabled = true;
+                }
+                if (timeRemaining < 3)
+                {
+
+                    danger.enabled = false;
+                }
+                if (timeRemaining < 2)
+                {
+
+                    danger.enabled = true;
+                }
+                if (timeRemaining < 1)
+                {
+
+                    danger.enabled = false;
+                }
+
+                if (timeRemaining < 0)
+                {
+
+                    oxygenText.text = "Oxygen Empty";
+                    oxygenText.color = Color.red;
+                    _countingDown = false;
+                    danger.enabled = false;
+
+                }
 
             }
-             if (timeRemaining < 5)
-            {
-                
-                danger.enabled = false;
-            }
-             if (timeRemaining < 4)
-            {
-                
-                danger.enabled = true;
-            }
-             if (timeRemaining < 3)
-            {
-           
-                danger.enabled = false;
-            }
-             if (timeRemaining < 2)
-            {
-           
-                danger.enabled = true;
-            }
-             if (timeRemaining < 1)
-            {
-           
-                danger.enabled = false;
-            }
-
-            if (timeRemaining < 0)
-            {
-
-                oxygenText.text = "Oxygen Empty";
-                oxygenText.color = Color.red;
-                _countingDown = false;
-                danger.enabled = false;
-                lowSound.Stop();
-                CheckGameOver();
-            }
-
         }
     }
-
-    }
-
-
 }
+    
+
+
+
+
+
+
 
 
 

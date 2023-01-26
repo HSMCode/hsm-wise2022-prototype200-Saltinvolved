@@ -11185,17 +11185,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368c6e1a7945794bb356f850a357d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 10
+  timeRemaining: 30
   oxygenText: {fileID: 0}
   _countingDown: 1
   lowSound: {fileID: 1106318464}
   danger: {fileID: 757549462}
-  isDangerOn: 0
   resultLost: You lost!
-  resultWin: You won!
+  resultWon: You won!
   _gameWon: 0
+  gameLost: 0
   _gameOver: 0
   script: {fileID: 1931187312}
+  SpaceShip: {fileID: 1931187306}
 --- !u!1001 &1051275080
 PrefabInstance:
   m_ObjectHideFlags: 0

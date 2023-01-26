@@ -11,7 +11,7 @@ public class SpaceshipGoal : MonoBehaviour
     public ParticleSystem emitParticleSystem;
     //Get Game Over Bools 
    // public ScriptUI script;
-    public bool _landed= false;
+    public  bool _landed= false;
     
  
     
@@ -32,6 +32,7 @@ public class SpaceshipGoal : MonoBehaviour
         
             PlayParticles(true);
             _landed = true;
+           
         }
     }
     
