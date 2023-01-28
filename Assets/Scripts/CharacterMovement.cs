@@ -19,10 +19,12 @@ public class CharacterMovement : MonoBehaviour
 
     // Boost Variablen 
     private float speed;
-    private float speedBoost = 8.5f;
-    private float speedBoostDuration = 2f;
+    public float speedBoost = 8.5f;
+    public float speedBoostDuration = 2f;
 
     private bool boostActive;
+
+    
 
 
 
@@ -39,27 +41,29 @@ public class CharacterMovement : MonoBehaviour
         {
             speed = normalSpeed;
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //IsJumpPressed = Input.GetButtonDown(KeyCode.Space);
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     IsJumpPressed = true;
-        // }
+       
         ProcessInputs();
     }
 
     void FixedUpdate()
     {
-        // if (IsJumpPressed)
-        // {
-        //     _playerRb.velocity = new Vector3(0, 10, 0);
-        //     isMoving = true;
-        //     Debug.Log("jump");
-        // }
+        if (Input.GetKeyDown("a"))
+         {
+            Vector3 newRot = new Vector3(16f, 230f, -2.6f);
+            transform.rotation = Quaternion.Euler(newRot);
+
+            }
+        if (Input.GetKeyDown("d"))
+         {
+            Vector3 newRot = new Vector3(19f, 136f, 2.6f);
+            transform.rotation = Quaternion.Euler(newRot);
+            }
 
         if (isMoving)
         {
