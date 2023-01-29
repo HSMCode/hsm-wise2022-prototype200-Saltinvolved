@@ -98,7 +98,7 @@ public class CharacterMovement : MonoBehaviour
         fartsPs.Emit(50);
     }
 
-      public void RandomFart()
+      private void RandomFart()
     {
 
             // Get a random slot from the Fart prefab array
@@ -110,7 +110,7 @@ public class CharacterMovement : MonoBehaviour
     }
     
     // methods for Boost 
-    public void ActivateSpeedBoost()
+    private void ActivateSpeedBoost()
     {
         StartCoroutine(SpeedBoostCooldown());
     }

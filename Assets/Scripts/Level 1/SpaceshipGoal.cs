@@ -9,6 +9,7 @@ public class SpaceshipGoal : MonoBehaviour
     public ParticleSystem goalParticles;
     public  bool _hasLanded= false;
 
+    
     // Game Over when Goal ist reached 
     public void OnTriggerEnter(Collider other)
     {

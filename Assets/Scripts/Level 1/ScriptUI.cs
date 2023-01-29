@@ -12,26 +12,24 @@ public class ScriptUI : MonoBehaviour
     private GameObject _gameOverUI;
     
     //Variables for Timer 
-    public float timeRemaining;
-    public Text _oxygenText;
+     [SerializeField] float timeRemaining;
+    private Text _oxygenText;
    
-    public bool countingDown = true;
+    private bool countingDown = true;
     
     // Low Oxygen Effects
-     public AudioSource _lowSound;
+     private AudioSource _lowSound;
      public Image danger;
     
 
 
      //Variables for result UI
     private Text _resultUI;
-     public string resultLost = "You lost!";
-    public string resultWon = "You won!";
+    private string resultLost = "You lost!";
+    private string resultWon = "You won!";
 
     // variables for Game Over
-    public bool gameWon;
-    public bool gameLost;
-    public bool gameOver = false;
+    private bool gameOver = false;
     public GameObject _nextLevelButton;
 
       //getting script for Win
@@ -44,22 +42,24 @@ public class ScriptUI : MonoBehaviour
         _gameUI = GameObject.Find("GameUI");
         _gameOverUI = GameObject.Find("GameOverUI");
         _resultUI = GameObject.Find("Result").GetComponent<Text>();
+        
        
         // get components for Oxygen low 
         _oxygenText = GetComponent<Text>() as Text;
         _lowSound  = GetComponent<AudioSource> () as AudioSource;
         
         //get components for Win
+        
         _script = SpaceShip.GetComponent<SpaceshipGoal>();
 
 
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false); 
 
-        //Playing Low sound 5seconds before end 
-        _lowSound.PlayDelayed(25f);       
+        //Playing Low sound 6seconds before end when timer is at 32 seconds
+        _lowSound.PlayDelayed(27f);       
         
-        // Showing danger image that indcates that oxygen is low 
+        // Showing danger image that indcates that oxygen is low is off 
          danger.enabled = false;
     } 
        
@@ -78,7 +78,6 @@ public class ScriptUI : MonoBehaviour
         //When player reaches ship Game is over and Won
         if (_script._hasLanded == true)
         {
-            gameWon = true;
             gameOver = true;
             countingDown = false;
             _resultUI.text = resultWon;
@@ -88,7 +87,6 @@ public class ScriptUI : MonoBehaviour
         // If he doesn't reach ship and timer is at zero Game is over and lost
          else if (timeRemaining < 0)
         {
-            gameLost = true;
             gameOver = true;
             countingDown = false;
             _resultUI.text = resultLost;
@@ -116,7 +114,9 @@ public class ScriptUI : MonoBehaviour
             {
                 timeRemaining -= Time.deltaTime;
                 _oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
+    
                 LowOxygenEffects();
+
             }
                 
                 else if (timeRemaining < 0)
@@ -148,7 +148,7 @@ public class ScriptUI : MonoBehaviour
          if (timeRemaining < 4)
         {
             _oxygenText.color = Color.red;
-            danger.enabled = false;
+            danger.enabled = true;
                 
          }
                 

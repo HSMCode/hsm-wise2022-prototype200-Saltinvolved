@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 235119126833686234}
   - component: {fileID: 3813585767576201599}
   - component: {fileID: 1371455234786565557}
-  - component: {fileID: 1313766547898902453}
   - component: {fileID: -1523163612800805675}
   m_Layer: 0
   m_Name: donutSprinkles
@@ -87,19 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1313766547898902453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578887603045153888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2eb0771f02d2d74cacbc8640b20280d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AstroBoi: {fileID: 0}
 --- !u!65 &-1523163612800805675
 BoxCollider:
   m_ObjectHideFlags: 0
