@@ -14,18 +14,20 @@ public class CharacterMovement : MonoBehaviour
 
     // Variables for Item Collect
     public ParticleSystem fartsPs;
-    private AudioSource fartSound;
+    // Array for fart prefabs to randomly choose from
+    public AudioSource[] FartsAr;
     
 
     // Variables for Boost
     private float speed;
-    [SerializeField] float speedBoost = 15f;
-    [SerializeField] float speedBoostDuration = 2f;
-    private bool boostActive = false;
+    public float speedBoost = 15f;
+    public float speedBoostDuration = 8f;
+    public bool boostActive;
 
 
-    // Array for fart prefabs to randomly choose from
-    public AudioSource[] FartsAr;
+    
+    
+ 
     
 
     
@@ -33,6 +35,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         _playerRb = GetComponent<Rigidbody>();
+        boostActive = false;
     }
 
      void Update()
@@ -88,8 +91,9 @@ public class CharacterMovement : MonoBehaviour
         {
             EmitFartParticles(); 
             RandomFart();
-            Destroy(other.gameObject);
             ActivateSpeedBoost();
+            Destroy(other.gameObject);
+            
         }
     }
     
@@ -112,13 +116,16 @@ public class CharacterMovement : MonoBehaviour
     // methods for Boost 
     private void ActivateSpeedBoost()
     {
+        boostActive = true;
         StartCoroutine(SpeedBoostCooldown());
     }
     IEnumerator SpeedBoostCooldown()
     {
         speed = speedBoost;
         yield return new WaitForSeconds(speedBoostDuration);
+        boostActive = false;
         speed = normalSpeed;
+        
     }
     
     private void SpeedCheck()
