@@ -4,79 +4,56 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float time = 0.0f;
-    public float normalSpeed = 5f;
-    public Rigidbody _playerRb;
+    // Variables for basic Movement
+    private float time = 0.0f;
+    [SerializeField] float normalSpeed = 6f;
+    private Rigidbody _playerRb;
     private bool isMoving = false;
-    //private bool IsJumpPressed = false;
+   
     private Vector3 moveDirection;
 
     // Variables for Item Collect
-   
-    public ParticleSystem Farts;
-    public AudioSource fartSound;
-    public GameObject astroBoi;
+    public ParticleSystem fartsPs;
+    private AudioSource fartSound;
+    
 
-    // Boost Variablen 
+    // Variables for Boost
     private float speed;
-    public float speedBoost = 8.5f;
-    public float speedBoostDuration = 2f;
+    [SerializeField] float speedBoost = 15f;
+    [SerializeField] float speedBoostDuration = 2f;
+    private bool boostActive = false;
 
-    private bool boostActive;
+
+    // Array for fart prefabs to randomly choose from
+    public AudioSource[] FartsAr;
+    
 
     
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         _playerRb = GetComponent<Rigidbody>();
-        boostActive = false; 
-        if (boostActive)
-        {
-            speed = speedBoost;
-        }
-        else 
-        {
-            speed = normalSpeed;
-        }
-        
     }
 
-    // Update is called once per frame
-    void Update()
+     void Update()
     {
-       
         ProcessInputs();
+        SpeedCheck();
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown("a"))
-         {
-            Vector3 newRot = new Vector3(16f, 230f, -2.6f);
-            transform.rotation = Quaternion.Euler(newRot);
-
-            }
-        if (Input.GetKeyDown("d"))
-         {
-            Vector3 newRot = new Vector3(19f, 136f, 2.6f);
-            transform.rotation = Quaternion.Euler(newRot);
-            }
-
         if (isMoving)
         {
             time = time + Time.fixedDeltaTime;
-            if (time > 10.0f)
-            {
-                Debug.Log(gameObject.transform.position.y + " : " + time);
-            }
         }
+
         Move();
+        RotatePlayer();
     }
 
-    void ProcessInputs()
+   // Methods for Moving 
+    private void ProcessInputs()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -84,47 +61,76 @@ public class CharacterMovement : MonoBehaviour
         moveDirection = new Vector3(moveX, moveY).normalized;
     }
 
-    void Move()
+    private void Move()
     {
         
         _playerRb.velocity = new Vector3(moveDirection.x * speed, moveDirection.y * speed);
     }
 
-
-// versuch Boost 
-// Corutine 
-
-public void ActivateSpeedBoost()
-{
-    StartCoroutine(SpeedBoostCooldown());
-}
-
-IEnumerator SpeedBoostCooldown()
-{
-    speed = speedBoost;
-    yield return new WaitForSeconds(speedBoostDuration);
-    speed = normalSpeed;
-
-}
-
-// Food Collect auf diesem script ? 
-
-private void OnTriggerEnter(Collider other)
- {
-    Debug.Log (other.name + " just hit "+ gameObject.name);
-    if (other.CompareTag("Food"))
+    private void RotatePlayer()
     {
-        EmitParticles(); 
-        fartSound.Play();
-        Destroy(other.gameObject);
-        ActivateSpeedBoost();
-    }
- }
-       
-    void EmitParticles()
-    {
-        Farts.Emit(50);
+        if (Input.GetKeyDown("a"))
+        {
+            Vector3 newRot = new Vector3(16f, 230f, -2.6f);
+            transform.rotation = Quaternion.Euler(newRot);
+        }
+        if (Input.GetKeyDown("d"))
+        {
+            Vector3 newRot = new Vector3(19f, 136f, 2.6f);
+            transform.rotation = Quaternion.Euler(newRot);
+        }
     }
 
+    // Methods for Food Collect 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Food"))
+        {
+            EmitFartParticles(); 
+            RandomFart();
+            Destroy(other.gameObject);
+            ActivateSpeedBoost();
+        }
+    }
+    
+    private void EmitFartParticles()
+    {
+        fartsPs.Emit(50);
+    }
+
+      public void RandomFart()
+    {
+
+            // Get a random slot from the Fart prefab array
+            int number = Random.Range(0, FartsAr.Length);
+
+            // Instantiate a clone from the prefab enemies at the previously generated position
+            Instantiate(FartsAr[number]);
+
+    }
+    
+    // methods for Boost 
+    public void ActivateSpeedBoost()
+    {
+        StartCoroutine(SpeedBoostCooldown());
+    }
+    IEnumerator SpeedBoostCooldown()
+    {
+        speed = speedBoost;
+        yield return new WaitForSeconds(speedBoostDuration);
+        speed = normalSpeed;
+    }
+    
+    private void SpeedCheck()
+    {
+        if(boostActive)
+        {
+            speed = speedBoost;
+        }
+        else 
+        {
+            speed = normalSpeed;
+        }
+    }
 }
 

@@ -5,73 +5,31 @@ using UnityEngine;
 public class SpaceshipGoal : MonoBehaviour
 
 {
-    public GameObject AstroBoi;
-    //public AudioSource audioSource;
-    public ParticleSystem playParticleSystem;
-    public ParticleSystem emitParticleSystem;
-    //Get Game Over Bools 
-   // public ScriptUI script;
-    public  bool _landed= false;
-    
- 
-    
+    public GameObject player;
+    public ParticleSystem goalParticles;
+    public  bool _hasLanded= false;
+
+    // Game Over when Goal ist reached 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(gameObject.name + "triggerd into" + gameObject.name);
-
-         // When roboter collides with goal 
-        if(other.name == AstroBoi.name)
+       if(other.name == player.name)
         { 
-            //audioSource.Play();
-            
-
-            //Using a ParticleSystem for emission 
-            EmitParticles();
-           
-           // Using a ParticleSystem with play and Stop - play true
-        
             PlayParticles(true);
-            _landed = true;
-           
+        
+            //setting bool for Winning Condition in ScriptUI
+            _hasLanded = true;
         }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-
-        Debug.Log(other.name + "triggered into" + gameObject.name);
-
-        //when roboter collides with goal 
-        if(other.name == AstroBoi.name)
-        {
-            Debug.Log("Exit");
-            //using a ParticleSystem with Play and Stop - play false 
-            PlayParticles(false); 
-            EmitParticles();
-             
-            
-            
-            
-
-            
-        }
-    }
-
-    //custom method to execute emitting of partiles 
-     void EmitParticles()
-     {
-         emitParticleSystem.Emit(50);
     }
     void PlayParticles(bool on)
     {
         if(on)
         {
-            playParticleSystem.Play();
+            goalParticles.Play();
         }
         else if(!on)
         {
-            playParticleSystem.Stop();
+            goalParticles.Stop();
         }
     }
-
+    
 }

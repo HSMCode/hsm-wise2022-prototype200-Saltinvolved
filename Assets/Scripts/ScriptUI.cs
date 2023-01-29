@@ -7,15 +7,18 @@ using UnityEngine.UI;
 
 public class ScriptUI : MonoBehaviour
 {
+    // Diffrent UIs for Play mode and Game Over Mode 
     private GameObject _gameUI;
     private GameObject _gameOverUI;
+    
     //Variables for Timer 
     public float timeRemaining;
-    public Text oxygenText;
+    public Text _oxygenText;
    
-    public bool _countingDown = true;
+    public bool countingDown = true;
+    
     // Low Oxygen Effects
-     public AudioSource lowSound;
+     public AudioSource _lowSound;
      public Image danger;
     
 
@@ -26,51 +29,39 @@ public class ScriptUI : MonoBehaviour
     public string resultWon = "You won!";
 
     // variables for Game Over
-    public bool _gameWon;
+    public bool gameWon;
     public bool gameLost;
-    public bool _gameOver = false;
+    public bool gameOver = false;
+    public GameObject _nextLevelButton;
 
-    // Variables for Win
-    //private GameObject _astroBoi;
-    //private GameObject _spaceShip;
-
-    //getting script for Win
-    public SpaceshipGoal script;
-    public GameObject SpaceShip;
-     
-    
-    
-
-
-
-    void Start()
+      //getting script for Win
+    public SpaceshipGoal _script;
+    public GameObject  SpaceShip;
+   
+      void Start()
     {
         //get components for GameOverUI
         _gameUI = GameObject.Find("GameUI");
         _gameOverUI = GameObject.Find("GameOverUI");
         _resultUI = GameObject.Find("Result").GetComponent<Text>();
+       
         // get components for Oxygen low 
-        oxygenText = GetComponent<Text>() as Text;
-        //lowSound  = GetComponent<AudioSource> () as AudioSource;
+        _oxygenText = GetComponent<Text>() as Text;
+        _lowSound  = GetComponent<AudioSource> () as AudioSource;
         
-        //get components for Winbedingungen 
-        //_astroBoi = GameObject.Find("AstroBoi");
-        //_spaceShip = GameObject.Find("SpaceShip");
-        script = SpaceShip.GetComponent<SpaceshipGoal>();
+        //get components for Win
+        _script = SpaceShip.GetComponent<SpaceshipGoal>();
 
 
-
-      
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false); 
-        lowSound.PlayDelayed(25f);       
-        
-          
-         danger.enabled = false;
-         
-        
 
-        } 
+        //Playing Low sound 5seconds before end 
+        _lowSound.PlayDelayed(25f);       
+        
+        // Showing danger image that indcates that oxygen is low 
+         danger.enabled = false;
+    } 
        
     void Update()
     {
@@ -80,104 +71,103 @@ public class ScriptUI : MonoBehaviour
 
 
     
-
+    //Methode Checkes when Game is over and what to do when Game is Over 
     private void CheckGameOver()
     {
 
-        
-        if (script._landed == true)
+        //When player reaches ship Game is over and Won
+        if (_script._hasLanded == true)
         {
-            _gameWon = true;
-            _gameOver = true;
-            _countingDown = false;
-             _resultUI.text = resultWon;
+            gameWon = true;
+            gameOver = true;
+            countingDown = false;
+            _resultUI.text = resultWon;
             _resultUI.color = Color.green;
         }
 
-
-            
-
-        
-    
-
-        else if (timeRemaining < 0)
+        // If he doesn't reach ship and timer is at zero Game is over and lost
+         else if (timeRemaining < 0)
         {
             gameLost = true;
-            _gameOver = true;
-            _countingDown = false;
+            gameOver = true;
+            countingDown = false;
             _resultUI.text = resultLost;
             _resultUI.color = Color.red;
+            _nextLevelButton.SetActive(false);
             
 
         }
-        if (_gameOver)
+        // when game is over we swicht to the Gameover UI and the Low Oxygensound stops playing 
+        if (gameOver)
         {
             _gameUI.SetActive(false);
             _gameOverUI.SetActive(true);
-            Destroy(lowSound);
+            Destroy(_lowSound);
         }
 
     }
 
-
+    //Method for the Timer  
     private void OxygenTimer()
     {
-        if (_countingDown)
+        if (countingDown)
         {
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
-                //Debug.Log(timeRemaining);
-
-
-
-                if (timeRemaining < 6)
-                {
-                    oxygenText.color = Color.red;
-                    danger.enabled = true;
-
-
-                }
-                if (timeRemaining < 5)
-                {
-
-                    danger.enabled = false;
-                }
-                if (timeRemaining < 4)
-                {
-
-                    danger.enabled = true;
-                }
-                if (timeRemaining < 3)
-                {
-
-                    danger.enabled = false;
-                }
-                if (timeRemaining < 2)
-                {
-
-                    danger.enabled = true;
-                }
-                if (timeRemaining < 1)
-                {
-
-                    danger.enabled = false;
-                }
-
-                if (timeRemaining < 0)
-                {
-
-                    oxygenText.text = "Oxygen Empty";
-                    oxygenText.color = Color.red;
-                    _countingDown = false;
-                    danger.enabled = false;
-
-                }
-
+                _oxygenText.text = "Oxygen empty in: " + Mathf.Round(timeRemaining).ToString() + " seconds";
+                LowOxygenEffects();
             }
+                
+                else if (timeRemaining < 0)
+                {
+                    _oxygenText.text = "Oxygen Empty";
+                    _oxygenText.color = Color.red;
+                    countingDown = false;
+                    danger.enabled = false;
+                }
+
+        }
+        
+    }
+    //Method for Low Oxygen Effects 
+    private void LowOxygenEffects()
+    {
+        if (timeRemaining < 6)
+        {
+            _oxygenText.color = Color.red;
+            danger.enabled = true;
+                
+         }
+            
+        if (timeRemaining < 5)        
+        {
+            danger.enabled = false;
+        }
+
+         if (timeRemaining < 4)
+        {
+            _oxygenText.color = Color.red;
+            danger.enabled = false;
+                
+         }
+                
+        if (timeRemaining < 3)
+        {
+            danger.enabled = false;
+        }
+            
+        if (timeRemaining < 2)
+        {
+            danger.enabled = true;
+        }
+            
+        if (timeRemaining < 1)
+        {
+            danger.enabled = false;
         }
     }
+    
 }
     
 
